@@ -3,7 +3,7 @@
 # imported modules
 import sys, os, base64
 # function for command line argument to specify a file
-# example: python base64_decode.py encodedData.txt
+# example: python decode64.py test_data.txt
 def inputfile():
 	filepath = sys.argv[1]
 	if not os.path.isfile(filepath):
