@@ -15,31 +15,44 @@ import requests
 import json
 import keyring
 import sys
+import re
+
+
+# check ip using regex, kill process if not
+def is_ip(ip):
+	ip_re = re.compile("^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$")
+	if ip_re.match(ip):
+		return ip
+	else:
+		print("process killed")
+		print(f"{ip} is not an ip address")
+		exit()
 
 # ipinfo IP geolocation API function
-def ipinfo_geolocation(g_ip):
+def ipinfo_geolocation(ip):
 	token = keyring.get_password("ipinfo", "username")
 	base_url = "https://ipinfo.io/"
 	uri = "?token="
-	request = requests.get(base_url + g_ip + uri + token)
+	request = requests.get(base_url + ip + uri + token)
 	data = json.loads(request.text)
 	print(json.dumps(data, indent =4, sort_keys=True))
 
 # ipinfo reverse IP API function
-def ipinfo_reverseIP(r_ip):
+def ipinfo_reverseIP(ip):
 	token = keyring.get_password("ipinfo", "username")
 	base_url = "https://ipinfo.io/domains/"
 	uri = "?token="
-	request = requests.get(base_url + r_ip + uri + token)
+	request = requests.get(base_url + ip + uri + token)
 	data = json.loads(request.text)
 	print(json.dumps(data, indent =4, sort_keys=True))
 
+
 # main function
 def main():
-	g_ip = sys.argv[1]
-	ipinfo_geolocation(g_ip)
-	r_ip = sys.argv[1]
-	ipinfo_reverseIP(r_ip)
+	ip = sys.argv[1]
+	is_ip(ip)
+	ipinfo_geolocation(ip)
+	ipinfo_reverseIP(ip)
 
 
 if __name__ == "__main__":
