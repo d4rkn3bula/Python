@@ -17,31 +17,29 @@ import keyring
 import sys
 
 # ipinfo IP geolocation API function
-def ipinfo_geolocation():
+def ipinfo_geolocation(g_ip):
 	token = keyring.get_password("ipinfo", "username")
 	base_url = "https://ipinfo.io/"
 	uri = "?token="
-	g_ip = sys.argv[1]
-
-	r = requests.get(base_url + g_ip + uri + token)
-	data = json.loads(r.text)
+	request = requests.get(base_url + g_ip + uri + token)
+	data = json.loads(request.text)
 	print(json.dumps(data, indent =4, sort_keys=True))
 
 # ipinfo reverse IP API function
-def ipinfo_reverseIP():
+def ipinfo_reverseIP(r_ip):
 	token = keyring.get_password("ipinfo", "username")
 	base_url = "https://ipinfo.io/domains/"
 	uri = "?token="
-	r_ip = sys.argv[1]
-
-	r = requests.get(base_url + r_ip + uri + token)
-	data = json.loads(r.text)
+	request = requests.get(base_url + r_ip + uri + token)
+	data = json.loads(request.text)
 	print(json.dumps(data, indent =4, sort_keys=True))
 
 # main function
 def main():
-	ipinfo_geolocation()
-	ipinfo_reverseIP()
+	g_ip = sys.argv[1]
+	ipinfo_geolocation(g_ip)
+	r_ip = sys.argv[1]
+	ipinfo_reverseIP(r_ip)
 
 
 if __name__ == "__main__":
