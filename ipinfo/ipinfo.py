@@ -1,14 +1,10 @@
 #!/usr/bin/python3
 
 '''
+Author: Kris Rostkowski
 python script utilizing ipinfo's API and prints json blob data to terminal
 ipinfo reference:  https://ipinfo.io
-You must setup keyring first "python3 -m pip install keyring"
-Keyring reference: https://pypi.org/project/keyring/
->>> import keyring
->>> keyring.set_password("system", "username", "password")
->>> keyring.get_password("system", "username")
-'password'
+to install requirements, python3 -m pip install -r requirements.txt
 '''
 
 import requests
@@ -73,8 +69,9 @@ def main():
 	elif args.reverseip:
 		is_ip(r_ip)
 		ipinfo_reverseIP(r_ip)
+	# debugging
 	else:
-		print("something is messed up")
+		print("Script is not functioning properly.")
 
 
 if __name__ == "__main__":
