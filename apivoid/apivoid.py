@@ -37,6 +37,7 @@ def is_ip(ip):
         print(f"{ip} is not an ip address")
         exit()
 
+
 # ip reputation function
 def ip_reputation(ip_rep):
 
@@ -44,7 +45,11 @@ def ip_reputation(ip_rep):
     base_url = "https://endpoint.apivoid.com/iprep/v1/pay-as-you-go/?key="
     request = requests.get(base_url + token + "&ip=" + ip_rep)
     data = json.loads(request.text)
-    print(json.dumps(data, indent=4, sort_keys=True))
+    print(type(data))
+    print(data)
+    keys = data.keys()
+    print(keys)
+
 
 # main
 def main():
