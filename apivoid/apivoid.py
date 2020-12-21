@@ -12,15 +12,6 @@ import re
 import argparse
 from pprint import pprint
 
-'''
-# global proxy for use with requests if you need it
-proxies = {
-    "http": "http://proxy.tld:port",
-    "https": "http://proxy.tld:port"
-}
-# add proxies=proxies to your request
-'''
-
 
 # argparse function
 # setup multiple arguments to call different apivoid functions
